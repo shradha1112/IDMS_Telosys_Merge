@@ -1,0 +1,219 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="card">
+          <div class="card-header" data-background-color>
+            <div class="col-sm-6 col-md-4  col-xs-5">
+              <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" color="#03659D" fullScreen="true"
+                type="line-scale-pulse-out-rapid">
+              </ngx-spinner>
+              <tr>
+                <td>
+                  <h6>Inbox</h6>
+                </td>
+                <td>
+                  <div class="col-sm-1">
+                    <label class="label-color"> Show</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="col-sm-offset-1 ">
+                    <select name="datatables_length" aria-controls="datatables" (change)="changePage($event)"
+                      class="form-control select-style">
+                      <option class="option-style" value="10">10</option>
+                      <option class="option-style" value="25">25</option>
+                      <option class="option-style" value="50">50</option>
+                      <option class="option-style" value="-1">All</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="col-sm-1">
+                    <label class="label-color">entries</label>
+                  </div>
+                </td>
+              </tr>
+            </div>
+            <!-- <div class="col-sm-2 col-md-1 col-xs-2 col-md-offset-2">
+                            <button type="submit" class="btn button-style add-btn-position" (click)="addNewWorkFlow()">ADD
+                                DOCUMENT</button>
+                        </div> -->
+            <div class="col-sm-2 col-md-2 col-xs-2 col-md-offset-6">
+              <div class="form-group-sm is-empty searchHeight">
+                <input type="search" id="mysearch" (keyup)="searchdata($event)"
+                  class="form-control input-color placeholder-style" 
+                  placeholder="Search" aria-controls="datatables">
+              </div>
+            </div>
+          </div>
+          <div class="card-content col-md-12 col-sm-12 table-padding" style="top:0px !important">
+            <div class="material-datatables table-responsive ">
+
+              <table id="datatables"
+                class="table table-striped table-bordered table-hover table-responsive" cellspacing="0"
+                width="100%">
+                <thead class="text-info">
+                  <tr>
+                    <th>{{ dataTable.headerRow[0] }}</th>
+                    <th style="width: 152px;">{{ dataTable.headerRow[1] }}</th>
+                    <th>{{ dataTable.headerRow[2] }}</th>
+                    <th style="width: 160px;">{{ dataTable.headerRow[3] }}</th>
+                    <th style="width: 155px;">{{ dataTable.headerRow[4] }}</th>
+                    <th>{{ dataTable.headerRow[5] }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let doclist of dataTable.dataRows;let i=index"> 
+                    <td>{{doclist.projectId}}</td>
+                    <td>{{doclist.categoryId}}</td>
+                    <td>
+                      <a class="file-link" (click)='setDocumentSrc(doclist.url)' href="#file1Banner" data-toggle="modal" data-target="#file1Banner">
+                        {{doclist.docName}}
+                      </a>
+                    </td>
+                    <td>{{doclist.createdBy}} - {{doclist.createdOn | date:'MM/dd/yyyy'}}</td>
+                    <td><a (click)='openDetails()'>VIEW</a></td>
+                    <td>
+                      <button class="btn button btn-sm" data-toggle="modal" data-target="#exampleModalLong"
+                      title="ACTIVE" name="Active">
+                      APPROVE
+                    </button>
+
+                    <button class="btn button btn-sm" style="background-color: #d02f2f;" data-toggle="modal"
+                      data-target="#rejectModal" title="DEACTIVE" name="DEActive">
+                      REJECT
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <form [formGroup]="docApproval" action="" method="">
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Comments/Remarks</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <textarea rows="4" formControlName="comments"  cols="70"></textarea>
+                    <input type="hidden" value="approved" id="status">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="approvalFormSubmit()" id="approvSubmit" class="btn" style="background: #036094;">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form [formGroup]="docRejection" action="" method="">
+            <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Comments/Remarks</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12">
+                        <label>Reviewed Document</label>
+                        <input type="file" id="wizard-picture" name="staffImageFile" (change)="selectFile($event)">
+                        <input type="hidden" class="form-control" formControlName="docUrl" id="url" value="init">
+                        <input type="hidden" value="rejected" id="flag">
+                        <input type="hidden" value="" id="docName">
+                      </div><br /><br />
+                      <div class="col-sm-12 col-md-12"><br /><br />
+                        <label>Remarks</label>
+                        <textarea rows="4" formControlName="remarks" cols="70"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="rejectFormSubmit()" id="rejectsubmit" class="btn"
+                      style="background: #036094;">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+          <div class="modal fade" id="bannerformmodal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><strong></strong></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="height: 500px;">
+                  <embed width="100%" height="100%" src="./assets/img/Design-Doc_4.pdf">
+               </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="file1Banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><strong></strong></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="height: 500px;">
+                  <embed width="100%" height="100%" src="" id="docURL">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="file2Banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><strong></strong></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="height: 500px;">
+                  <embed width="100%" height="100%" src="./assets/img/Design-Doc_4.pdf">
+               </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end content-->
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+</div>

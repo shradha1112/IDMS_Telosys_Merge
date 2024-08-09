@@ -1,0 +1,147 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                <div class="card-header" data-background-color>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-5  col-xs-5">
+                            <tr>
+                                <td>
+                                    <h6>{{projectAction}} Project</h6>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" fullScreen="true" type="line-scale-pulse-out-rapid">
+                </ngx-spinner>
+                <div class="card-content ">
+                    <div *ngIf="statusCode === 200" class="alert alert-success" data-icon-bg-color="alert-green">
+                        <strong>Project Added Successfully!!</strong>
+                    </div>
+                </div>
+                <form [formGroup]="AddProjectForm" action="" method="">
+                        <div class="row" >
+               
+                                        <div class="card-content">
+                                            <div class="input-group col-md-12">
+                               
+                        <div class="col-md-4">
+                                <div>
+                                    <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                        <div class="form-group label-floating">
+                                            <label #projectNamefloatLable id="projectName_floatToLabel" class="control-label">
+                                                <small class="AsteriskColor">*</small> Project Name
+                                            </label>
+                                            
+                                            <input type="text" name="projectName" formControlName= "projectName"  [(ngModel)]="projectName" formControlName="projectName"
+                                            class="form-control">
+                                          <!--  <docms-field-error-display
+                                            [displayError]="isFieldValid(AddWorkFlowForm, 'projectName')"
+                                            errorMsg="Project Name is required ">
+                                        </docms-field-error-display>-->
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label required">
+                                        <small class="AsteriskColor">*</small>
+                                        Project Description
+                                    </label>
+                                    <input type="text" name="ProjectDescription" formControlName= "projectDescription"  [(ngModel)]="projectDescription" formControlName="projectDescription"
+                                            class="form-control">
+                                   </div>
+                            </div>
+
+                            
+                            <div class="col-md-4">
+                                <div>
+                                    <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                   <div class="form-group label-floating" id="managerName">
+                                                       <label #managerNameLable id="managerName_floatToLabel" class="control-label">
+                                                           <small class="AsteriskColor">*</small> Manager Name
+                                                       </label>
+                                                      
+                                                       <md2-select name="managerName" formControlName="managerName" [(ngModel)]="managerName"
+                                                           style="width: 100%" (click)="onManagerName()">
+                                                           <md2-option class="decrease-height">Select Manager</md2-option>
+                                                           <md2-option class="decrease-height" value = "Mike">Mike</md2-option>
+                                                           <md2-option class="decrease-height" value = "William">William</md2-option>
+                                                           <md2-option class="decrease-height" value = "Ashley">Ashley</md2-option>
+                                                       </md2-select>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                   </div>
+
+
+                                   <div class="col-md-4">
+                                    <div>
+                                        <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                    <div class="form-group label-floating" id="projectStartDateDiv">
+                                        <label #staffDobLable id="projectStartDate_floatToLabel" class="control-label">
+                                            <small class="AsteriskColor">*</small> Start date
+                                        </label>
+                                       
+                                        <mat-form-field style="width: 100% !important;">
+                                            <div class="input-icon-wrap" style="margin-top:-8px;flex-direction: row;display: flex;">
+                                                <input matInput type="text" class="input-with-icon" id="projectStartDate"
+                                                    (click)="dobDatepicker('projectStartDate',dobfloatToLabel)" name="projectStartDate"
+                                                    formControlName="projectStartDate">
+                                                <span class="input-icon"
+                                                    (click)="dobDatepicker('projectStartDate',staffdobfloatToLabel)">
+                                                    <span class="fa fa-calendar fa-lg"></span>
+                                                </span>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+    
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                    <div class="form-group label-floating" id="projectEndDateDiv">
+                                        <label #staffDobLable id="projectEndDate_floatToLabel" class="control-label">
+                                            <small class="AsteriskColor">*</small> End date
+                                        </label>
+                                       
+                                        <mat-form-field style="width: 100% !important;">
+                                            <div class="input-icon-wrap" style="margin-top:-8px;flex-direction: row;display: flex;">
+                                                <input matInput type="text" class="input-with-icon" id="projectEndDate"
+                                                    (click)="dobDatepicker('projectEndDate',dobfloatToLabel)" name="projectEndDate"
+                                                    formControlName="projectEndDate">
+                                                <span class="input-icon"
+                                                    (click)="dobDatepicker('projectEndDate',staffdobfloatToLabel)">
+                                                    <span class="fa fa-calendar fa-lg"></span>
+                                                </span>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+              
+
+         </div>    
+                                </div>
+                                    </div><br><br><br>
+                                    <div class="row">
+                                            <div style="float: right;"> 
+                                                <input type='button' [disabled]="loading" class="btn btn-info btn-round" name='SAVE'
+                                                value='SUBMIT' id="addProject" (click) ="onsubmit($event)"/>&nbsp;
+                                                <input type='button' (click) = "onCancel()" class='btn button pull-right' name='cancel' value="CANCEL">
+                                            </div>
+                                        </div>
+        </form>
+        
+    </div>
+        </div>
+        
+    </div>
+</div>

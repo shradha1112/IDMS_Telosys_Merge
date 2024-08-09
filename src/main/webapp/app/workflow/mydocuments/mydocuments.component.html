@@ -1,0 +1,447 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header" data-background-color>
+                        <div class="col-sm-6 col-md-4  col-xs-5">
+                            <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" color="#03659D"
+                                fullScreen="true" type="line-scale-pulse-out-rapid">
+                            </ngx-spinner>
+                            <tr>
+                                <td>
+                                    <h6>My Documents</h6>
+                                </td>
+                                <td>
+                                    <div class="col-sm-1">
+                                        <label class="label-color"> Show</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-sm-offset-1 ">
+                                        <select name="datatables_length" aria-controls="datatables"
+                                            (change)="changePage($event)" class="form-control select-style">
+                                            <option class="option-style" value="10">10</option>
+                                            <option class="option-style" value="25">25</option>
+                                            <option class="option-style" value="50">50</option>
+                                            <option class="option-style" value="-1">All</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-sm-1">
+                                        <label class="label-color">entries</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col-sm-2 col-md-1 col-xs-2 col-md-offset-2">
+                            <button type="submit" class="btn button-style add-btn-position"
+                                (click)="addNewWorkFlow()">ADD
+                                DOCUMENT</button>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-xs-2 col-md-offset-1">
+                            <div class="form-group-sm is-empty searchHeight">
+                                <input type="search" id="mysearch" (keyup)="searchdata($event)"
+                                    class="form-control input-color placeholder-style" placeholder="Search by File Name"
+                                    aria-controls="datatables">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="btn-group btn-group-justified">
+                                <ng-container *ngFor="let list of tabList let i=index">
+                                    <a data-toggle="tab" id="list_{{i}}" (click)="viewModes=list"
+                                        [ngClass]="{'colorchange':list==viewModes}"
+                                        class="btn btn-style systems-tab-style" title="{{list}}">{{list}}</a>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <br><br>
+
+
+                        <!-- My Documents Div -->
+                        <div [ngSwitch]="viewModes">
+                            <div class="col-md-12 col-sm-12" *ngSwitchCase="'My Documents'">
+                                <div class="card-content col-md-12 col-sm-12 table-padding" style="top:0px !important">
+                                    <div class="material-datatables table-responsive ">
+                                        <div *ngIf="statusCode === 428" class="alert alert-danger"
+                                            data-icon-bg-color="alert-red">
+                                            <strong>Document Already Checked Out!</strong>
+                                        </div>
+                                        <div *ngIf="statusCode === 201" class="alert alert-success"
+                                            data-icon-bg-color="alert-green">
+                                            <strong>Document Checked In Successfully!</strong>
+                                        </div>
+                                        <div *ngIf="statusCode === 202" class="alert alert-success"
+                                            data-icon-bg-color="alert-green">
+                                            <strong>Notification Sent Successfully!</strong>
+                                        </div>
+                                        <table id="datatables"
+                                            class="table table-striped table-bordered table-hover table-responsive"
+                                            cellspacing="0" width="100%">
+                                            <thead class="text-info">
+                                                <tr>
+                                                    <th>{{ dataTable.headerRow[0] }}</th>
+                                                    <th>{{ dataTable.headerRow[1] }}</th>
+                                                    <th>{{ dataTable.headerRow[2] }}</th>
+                                                    <th>{{ dataTable.headerRow[3] }}</th>
+                                                    <th>{{ dataTable.headerRow[4] }}</th>
+                                                    <th>{{ dataTable.headerRow[5] }}</th>
+                                                    <th>{{ dataTable.headerRow[6] }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let docs of dataTable.dataRows;let i=index">
+                                                    <td>{{docs.projectId}}</td>
+                                                    <td>{{docs.categoryId}}</td>
+                                                    <td>{{docs.docName}}</td>
+                                                    <td>{{docs.createdBy}}
+                                                        {{dateConversion(docs.createdOn)|date:'MM/dd/yyyy'}}
+                                                    </td>
+                                                    <td>Pending</td>
+                                                    <td style="text-align: center;"><a (click)='openDetails()'>VIEW
+                                                            DETAILS</a></td>
+
+                                                    <td>
+                                                        <md2-select id="action" name="action"
+                                                            (change)="openAction($event,i);" [(ngModel)]="action"
+                                                            style="width: 100%">
+                                                            <md2-option class="decrease-height">Select Action
+                                                            </md2-option>
+                                                            <md2-option class="decrease-height" value="view">
+                                                                View </md2-option>
+                                                            <md2-option class="decrease-height" value="checkout">
+                                                                Check-Out</md2-option>
+                                                            <md2-option class="decrease-height" value="checkin">
+                                                                Check-In</md2-option>
+                                                        </md2-select>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!-- Team Documents Div -->
+                            <div class="col-md-12 col-sm-12" *ngSwitchCase="'Team Documents'">
+                                <div class="card-content col-md-12 col-sm-12 table-padding" style="top:0px !important">
+
+                                    <div class="row" style="border: 1px solid #1d7fb7;">
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group label-floating" id="projectName">
+                                                <md2-select name="projectName" [(ngModel)]="projectName"
+                                                    style="width: 100%" (click)="onProjectName()" multiple>
+                                                    <md2-option class="decrease-height">Project Name</md2-option>
+                                                    <md2-option class="decrease-height" value="1">QHSE PIPI
+                                                        WATERS</md2-option>
+                                                    <md2-option class="decrease-height" value="2">QHSE CIVI
+                                                        WATERS</md2-option>
+                                                    <md2-option class="decrease-height" value="3">ENGI MECH
+                                                    </md2-option>
+                                                    <md2-option class="decrease-height" value="4">ENGI PIPI
+                                                        WATERS</md2-option>
+                                                </md2-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group label-floating" id="deptName">
+                                                <md2-select name="deptName" [(ngModel)]="deptName" style="width: 100%"
+                                                    (click)="onDepartmentName()" multiple>
+                                                    <md2-option class="decrease-height">Department Name</md2-option>
+                                                    <md2-option value="1">ENGG</md2-option>
+                                                    <md2-option value="2">HR</md2-option>
+                                                    <md2-option value="3">HR</md2-option>
+                                                    <md2-option value="4">QHSE</md2-option>
+                                                    <md2-option value="Other">R&D</md2-option>
+
+                                                </md2-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group label-floating" id="docCategory">
+                                                <md2-select name="docCategory" [(ngModel)]="docCategory"
+                                                    style="width: 100%" (click)="onDocumentCategory()" multiple>
+                                                    <md2-option class="decrease-height">Document Category</md2-option>
+                                                    <md2-option value="1">Design Specification</md2-option>
+                                                    <md2-option value="2">Change Request Form</md2-option>
+                                                    <md2-option value="3">Compliance Form</md2-option>
+                                                    <md2-option value="4">Inspection Report</md2-option>
+                                                </md2-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group label-floating" id="approverName">
+                                                <md2-select name="approverName" [(ngModel)]="approverName"
+                                                    style="width: 100%" (click)="onApproverName()" multiple>
+                                                    <md2-option class="decrease-height">Staff Name</md2-option>
+                                                    <md2-option value="1">Katherine Baker</md2-option>
+                                                    <md2-option value="2">James Franklin</md2-option>
+                                                    <md2-option value="2">John Franklin</md2-option>
+                                                    <md2-option value="2">Donna Smith</md2-option>
+                                                </md2-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <input type='button' [disabled]="loading" class="btn btn-info pull-right"
+                                                name='SEARCH' value='ADVANCE SEARCH' style="margin-top: 15px;" />
+                                        </div>
+                                    </div><br />
+
+                                    <div class="material-datatables table-responsive ">
+                                        <table id="teamData"
+                                            class="table table-striped table-bordered table-hover table-responsive"
+                                            cellspacing="0" width="100%">
+                                            <thead class="text-info">
+                                                <tr>
+                                                    <th>{{ teamData.headerRow[0] }}</th>
+                                                    <th>{{ teamData.headerRow[1] }}</th>
+                                                    <th>{{ teamData.headerRow[2] }}</th>
+                                                    <th>{{ teamData.headerRow[3] }}</th>
+                                                    <th>{{ teamData.headerRow[4] }}</th>
+                                                    <th>{{ teamData.headerRow[5] }}</th>
+                                                    <th>{{ teamData.headerRow[6] }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>ENGI CIVI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Design Specification
+                                                            Document_V1.doc</a></td>
+                                                    <td>Oliver Jones </td>
+                                                    <td>Oliver Jones -22/02/2020</td>
+                                                    <td>William Spacey - 23/02/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <span style="color:red;font-weight: bold;">Transit</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI PIPI BOSTON WATERS </td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Drawing_v1.pdf</a></td>
+                                                    <td>Nicole Elavia</td>
+                                                    <td>Nicole Elavia - 02/12/2020</td>
+                                                    <td>Kevin Cookie - 05/12/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI MECH THERMAL DECK</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">ChangeRequestForm_v3.docx</a>
+                                                    </td>
+                                                    <td>Lara Pierse</td>
+                                                    <td>Lara Pierse - 20/03/2020</td>
+                                                    <td>Donna Smith - 25/03/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI ELEC THERMAL DECK</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">AcceptanceForm_v2.pdf</a>
+                                                    </td>
+                                                    <td>Katherine Baker</td>
+                                                    <td>Katherine Baker - 01/03/2021</td>
+                                                    <td>James Franklin- 02/03/2021</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:red;font-weight: bold;">Transist</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI CIVI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Design Specification
+                                                            Document.pdf</a></td>
+                                                    <td>Oliver Jones </td>
+                                                    <td>Oliver Jones -22/02/2020</td>
+                                                    <td>William Spacey - 23/02/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <span style="color:red;font-weight: bold;">Transit</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI PIPI BOSTON WATERS </td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Drawing_1.pdf</a></td>
+                                                    <td>Nicole Elavia</td>
+                                                    <td>Nicole Elavia - 02/12/2020</td>
+                                                    <td>Kevin Cookie - 05/12/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI MECH THERMAL DECK</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">ChangeRequestForm.pdf</a>
+                                                    </td>
+                                                    <td>Lara Pierse</td>
+                                                    <td>Lara Pierse - 20/03/2020</td>
+                                                    <td>Donna Smith - 25/03/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI ELEC THERMAL DECK</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">revised_design_doc.pdf</a>
+                                                    </td>
+                                                    <td>Katherine Baker</td>
+                                                    <td>Katherine Baker - 01/03/2021</td>
+                                                    <td>James Franklin- 02/03/2021</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:red;font-weight: bold;">Transist</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ENGI CIVI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Design Specification
+                                                            Design_doc.pdf</a></td>
+                                                    <td>Oliver Jones </td>
+                                                    <td>Oliver Jones -22/02/2020</td>
+                                                    <td>William Spacey - 23/02/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <span style="color:red;font-weight: bold;">Transit</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>QHSE CIVI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Drawing_v1.pdf</a></td>
+                                                    <td>Nicole Elavia</td>
+                                                    <td>Nicole Elavia - 02/12/2020</td>
+                                                    <td>Kevin Cookie - 05/12/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>QHSE CIVI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">waters_1.pdf</a>
+                                                    </td>
+                                                    <td>Lara Pierse</td>
+                                                    <td>Lara Pierse - 20/03/2020</td>
+                                                    <td>Donna Smith - 25/03/2020</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:blue;font-weight: bold;">Approved</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>QHSE PIPI BOSTON WATERS</td>
+                                                    <td>Engineering</td>
+                                                    <td><a class="file-link" href="#bannerformmodal" data-toggle="modal"
+                                                            data-target="#bannerformmodal">Design_doc.pdf</a>
+                                                    </td>
+                                                    <td>Katherine Baker</td>
+                                                    <td>Katherine Baker - 01/03/2021</td>
+                                                    <td>James Franklin- 02/03/2021</td>
+                                                    <td style="text-align: center;">
+                                                        <div class="col=sm-4">
+                                                            <span style="color:red;font-weight: bold;">Pending</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+
+                        </div><br>
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            <strong>Comments/Remarks</strong>
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea rows="4" cols="70"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn" style="background: #036094;">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="bannerformmodal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle"><strong></strong></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="height: 500px;">
+                                       <embed width="100%" height="100%" src="./assets/img/Design-Doc_4.pdf">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end content-->
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </div>

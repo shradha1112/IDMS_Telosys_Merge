@@ -1,0 +1,219 @@
+
+<div class="full-page registration-page">
+    <div class="navbar-header">
+    <nav class="navbar navbar-info navbar-fixed-top navbar-style">
+        <strong><a class="navbar-brand" href="http://www.cloudpointamerica.com">DocMS</a></strong>
+    </nav>
+</div>
+<!-- <div class="wrapper wrapper-full-page"> -->
+
+
+<div class="content">  <!--style="background-image: url('./assets/img/dms5.png');">-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 col-md-offset-1 col-sm-offset-2">
+                <div *ngIf="statusCode === 409" class="alert alert-danger" data-icon-bg-color="alert-red">
+                    <strong>User Name already exists!</strong>
+                </div>
+
+                <form [formGroup]="registerForm" class="form">
+
+                    <div style="margin-top: 98px;" class="card">
+                        <div style="margin-top: 21px;" class="card-header text-center"  style="background-color: #04519b;" data-background-color>
+                            <h4 class="card-title">User Registration</h4>
+                        </div>
+                        <div class="row">
+                            <div class="card-content">
+                                <div class="input-group">
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                First Name
+                                            </label>
+                                            <input type="text" name="firstName" formControlName="firstName"
+                                                class="form-control">
+                                            <idms-field-error-display
+                                                [displayError]="isFieldValid(registerForm, 'firstName')"
+                                                errorMsg="First Name is required">
+                                            </idms-field-error-display>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                Last Name
+                                            </label>
+                                            <input type="text" name="lastName" formControlName="lastName"
+                                                class="form-control">
+                                            <idms-field-error-display
+                                                [displayError]="isFieldValid(registerForm, 'lastName')"
+                                                errorMsg="Last Name is required ">
+                                            </idms-field-error-display>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                Mobile/Phone Number
+                                            </label>
+                                            <input type="text" id="mobileNo" class="form-control"
+                                                formControlName="mobileNo">
+                                            <idms-field-error-display
+                                                [displayError]="isFieldValid(registerForm, 'mobileNo')"
+                                                errorMsg="Please enter valid Mobile No.">
+                                            </idms-field-error-display>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                Email
+                                            </label>
+                                            <input type="email" id="email" class="form-control" formControlName="email">
+                                            <idms-field-error-display
+                                                [displayError]="registerForm['controls']
+                                                        .email.hasError('required') && registerForm['controls'].email.touched"
+                                                errorMsg="Email address is required.">
+                                            </idms-field-error-display>
+                                            <idms-field-error-display
+                                                [displayError]="registerForm['controls']
+                                                        .email.hasError('pattern') && registerForm['controls'].email.touched"
+                                                errorMsg="Enter valid email address.">
+                                            </idms-field-error-display>
+                                            <idms-field-error-display
+                                                [displayError]="registerForm['controls']
+                                                        .email.hasError('validEmail') && registerForm['controls'].email.dirty"
+                                                errorMsg="Email Address already exists.">
+                                            </idms-field-error-display>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-4" *ngIf="flag" >
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                Other Specialization
+                                            </label>
+                                            <input type="text" name="Specialization" formControlName="other"
+                                                class="form-control">
+                                            <ehr-field-error-display
+                                                [displayError]="isFieldValid(registerForm, 'other')"
+                                                errorMsg="Other Specialization is required ">
+                                            </ehr-field-error-display>
+                                        </div>
+                                    </div>-->
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating" id="dobdiv">
+                                            <label #dobfloatToLabel
+                                                [ngClass]="{'datepicket-label-style': buttonName=='UPDATE'}"
+                                                class="control-label control-label-datepicker">
+                                                <small class="AsteriskColor">*</small> DOB
+                                            </label>
+                                            <mat-form-field style="width: 100% !important;">
+                                                <div class="input-icon-wrap" style="margin-top:-8px;flex-direction: row;display: flex;">
+                                                    <input matInput type="text" class="input-with-icon" id="dob"
+                                                        (click)="dobDatepicker('dob',dobfloatToLabel)" name="dob"
+                                                        formControlName="dob" readonly required>
+                                                    <span class="input-icon"
+                                                        (click)="dobDatepicker('dob',dobfloatToLabel)">
+                                                        <span class="fa fa-calendar fa-lg"></span>
+                                                    </span>
+                                                </div>
+                                            </mat-form-field>
+                                        </div>
+                                        <idms-field-error-display [displayError]="isFieldValid(registerForm, 'dob')"
+                                            errorMsg="Please select DOB">
+                                        </idms-field-error-display>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label #genderfloatLable id="gender_floatToLabel"
+                                                class="pull-left label-floating">
+                                                <small class="AsteriskColor">*</small> Sex
+                                            </label>
+                                            <div class="radio-inline">
+                                                &nbsp;&nbsp;
+                                                <label for="Gender">
+                                                    <input formControlName="gender" value="male" type="radio"> Male
+                                                </label>
+                                            </div>
+                                            <div class="radio-inline">
+                                                <label for="female">
+                                                    <input formControlName="gender" value="female" type="radio">Female
+                                                </label>
+                                            </div>
+                                            <!-- <md2-select name="gender" formControlName="gender"
+                                                (click)="clearField(genderfloatLable)" style="width: 100%">
+                                                <md2-option value="male">Male</md2-option>
+                                                <md2-option value="female">Female</md2-option>
+                                                <md2-option value="unknown">Unknown</md2-option>
+                                            </md2-select> -->
+                                            <div class="error-display-margin">
+                                                <idms-field-error-display
+                                                    [displayError]="isFieldValid(registerForm, 'gender')"
+                                                    errorMsg="Required">
+                                                </idms-field-error-display>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4 col-md-offset-1">
+                            <input type='button' [disabled]="loading" class="btn btn-info btn-round" name='SAVE'
+                                value='Register' id="save" (click)="onsubmit($event)" />
+                            <input type='button' routerLink="/login" class="btn btn-info btn-round pull-right"
+                                name='cancel' value="CANCEL" />
+
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- </div> -->
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="pull-left">
+            <!-- <ul>
+                <li>
+                    <a style="color: black !important" href="http://www.cloudpointamerica.com">
+                        Company
+                    </a>
+                </li>
+                <li>
+                    <a style="color: black !important" href="http://www.cloudpointamerica.com/about-us.html">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a style="color: black !important" href="http://www.cloudpointamerica.com/contact-us.php">
+                        Contact
+                    </a>
+                </li>
+            </ul> -->
+        </nav>
+        <!-- <p style="color: black" class="copyright pull-right">
+            &copy; {{test | date: 'yyyy'}} <a style="color: #9c27b0 !important;"
+                href="http://www.cloudpointamerica.com">CloudPoint Systems Inc</a>, made with <span
+                style="color:red;font-size:20px"> &hearts; </span> for a better Document Management
+        </p> -->
+        </div>
+    
+</footer>
+<div class="full-page-background" style="background-image: url(./assets/img/dms5.png)"></div>
+
+</div>

@@ -1,0 +1,203 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                <div class="card-header" data-background-color>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-5  col-xs-5">
+                            <tr>
+                                <td>
+                                    <h6>Start WorkFlow</h6>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" color="#03659D" fullScreen="true"
+                    type="line-scale-pulse-out-rapid">
+                </ngx-spinner>
+                <div class="card-content ">
+                    <div *ngIf="statusCode === 200" class="alert alert-success" data-icon-bg-color="alert-green">
+                        <strong>Workflow Added Successfully!</strong>
+                    </div>
+
+                    <form [formGroup]="AddWorkFlowForm" action="" method="">
+                        <div class="row">
+
+                            <div class="card-content">
+                                <div class="input-group col-md-12">
+
+
+                                    <div class="col-md-4" style="top:7px;">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div>
+                                                    <label>Choose File</label>
+                                                    <input type="file" id="wizard-picture1" name="staffImageFile"
+                                                        (change)="selectFile($event)">
+                                                    <input type="hidden" class="form-control" 
+                                                        id="url1" value="init">
+                                                    <input type="hidden" id="fileName">
+
+
+
+                                                    <!--<input src = {{fileName}} type="file" id="wizard-picture1" name="staffImageFile" (change)="selectFile($event)">
+                            <input type="hidden" class="form-control" formControlName="fileName" id="url1" value="init">
+                            <input type="hidden" id="flag" >-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div class="form-group label-floating" id="projectName">
+                                                    <label #projectNamefloatLable id="projectName_floatToLabel"
+                                                        class="control-label">
+                                                        <small class="AsteriskColor">*</small> Project Name
+                                                    </label>
+
+                                                    <md2-select name="projectName" formControlName="projectName"
+                                                        [(ngModel)]="projectName" style="width: 100%"
+                                                        (click)="onProjectName()">
+                                                        <md2-option class="decrease-height" [value]="project.projectName"
+                                                            *ngFor="let project of allProjects">{{project.projectName}}
+                                                        </md2-option>
+                                                    </md2-select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div class="form-group label-floating" id="deptName">
+                                                    <label #deptNamefloatLable id="deptName_floatToLabel"
+                                                        class="control-label">
+                                                        <small class="AsteriskColor">*</small> Department Name
+                                                    </label>
+                                                    <md2-select name="deptName" formControlName="deptName"
+                                                        [(ngModel)]="deptName" style="width: 100%"
+                                                        (click)="onDepartmentName()" multiple>
+                                                        <md2-option class="decrease-height" [value]="department.deptName"
+                                                            *ngFor="let department of allDepartments">
+                                                            {{department.deptName}}</md2-option>
+                                                    </md2-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-4" style="top:7px;">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div class="form-group label-floating" id="docCategory">
+                                                    <label #docCategoryfloatLable id="docCategory_floatToLabel"
+                                                        class="control-label">
+                                                        <small class="AsteriskColor">*</small> Document Category
+                                                    </label>
+                                                    <md2-select name="docCategory" formControlName="docCategory"
+                                                        [(ngModel)]="docCategory" style="width: 100%"
+                                                        (click)="onDocumentCategory()">
+                                                        <md2-option class="decrease-height"
+                                                            [value]="category.categoryName"
+                                                            *ngFor="let category of allDocumentCategories">
+                                                            {{category.categoryName}}
+                                                        </md2-option>
+                                                    </md2-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4" style="top:7px;">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div class="form-group label-floating" id="approverName">
+                                                    <label #folderNamefloatLable id="approverName_floatToLabel"
+                                                        class="control-label">
+                                                        <small class="AsteriskColor">*</small> Staff Name
+                                                    </label>
+                                                    <md2-select name="approverName" formControlName="approverName"
+                                                        [(ngModel)]="approverName" style="width: 100%"
+                                                        (click)="onApproverName()" multiple>
+                                                        <md2-option class="decrease-height" [value]="staff.firstName"
+                                                            *ngFor="let staff of allStaffMembers">
+                                                            {{staff.firstName}} {{staff.lastName}}
+                                                        </md2-option>
+                                                    </md2-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  <!---  <div hidden>
+                                            <select  id = "loggedinuserselect">
+                                                <option *ngFor = "let userDetails of loggedInUser">
+                                                    {{userDetails.firstName}}
+                                                </option>
+                                            </select>
+                                    </div>-->
+
+
+
+
+                                    <div class="col-md-4" style="top:7px;">
+                                        <div class="form-group label-floating" id="approvalDueDateDiv">
+                                            <label #staffDobLable id="projectStartDate_floatToLabel"
+                                                class="control-label">
+                                                <small class="AsteriskColor">*</small> Due Date For Approval
+                                            </label>
+
+                                            <mat-form-field style="width: 100% !important;">
+                                                <div class="input-icon-wrap"
+                                                    style="margin-top:-8px;flex-direction: row;display: flex;">
+                                                    <input matInput type="text" class="input-with-icon" id="dueDate"
+                                                        (click)="dobDatepicker('dueDate',projectStartDate_floatToLabel)"
+                                                        name="dueDate" formControlName="dueDate">
+                                                    <span class="input-icon"
+                                                        (click)="dobDatepicker('dueDate',projectStartDate_floatToLabel)">
+                                                        <span class="fa fa-calendar fa-lg"></span>
+                                                    </span>
+                                                </div>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label required">
+                                                Comments/Remarks
+                                            </label>
+                                            <input type="text" name="ProjectDescription"
+                                                formControlName="projectDescription" [(ngModel)]="projectDescription"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div><br><br><br>
+                        <div class="row">
+                            <div style="float: right;">
+                                <input type='button' [disabled]="loading" class="btn button" name='SAVE' value='UPLOAD'
+                                    id="submitWorkFlow" (click)="onsubmit($event)" />
+                                &nbsp;<input type='button' (click)="onCancel()" class='btn button pull-right'
+                                    name='cancel' value="CANCEL" />
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>

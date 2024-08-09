@@ -1,0 +1,696 @@
+/* for toggle button css  */
+.switch {
+    position: relative;
+    display: block;
+    vertical-align: top;
+    width: 100px;
+    height: 30px;
+    padding: 3px;
+    margin: 24px 40px 0px 20px;
+    background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
+    background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
+    border-radius: 18px;
+    box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    box-sizing:content-box;
+  }
+  .switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    box-sizing:content-box;
+  }
+  .switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: #04519b;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+    box-sizing:content-box;
+  }
+  .switch-label:before, .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+    box-sizing:content-box;
+  }
+  .switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: white;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+    font-size: 15px;
+    font-weight: bold;
+
+
+  }
+  .switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: #FFFFFF;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .switch-input:checked ~ .switch-label {
+    background: #337ab7;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+  .switch-input:checked ~ .switch-label:before {
+    opacity: 0;
+  }
+  .switch-input:checked ~ .switch-label:after {
+    opacity: 1;
+  }
+  .switch-handle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+    background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
+  .switch-handle:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+    background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+    border-radius: 6px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+  }
+  .switch-input:checked ~ .switch-handle {
+    left: 74px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
+   
+  /* Transition
+  ========================== */
+  .switch-label, .switch-handle {
+    transition: All 0.3s ease;
+    -webkit-transition: All 0.3s ease;
+    -moz-transition: All 0.3s ease;
+    -o-transition: All 0.3s ease;
+  }
+
+  p {
+    font-family: Lato;
+  }
+
+  .mat-button-toggle-group, .mat-button-toggle-standalone {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 35px;
+    margin-left: 25px;
+}
+.mat-button-toggle-checked {
+  background-color: #337ab7;
+  color: rgba(0,0,0,.54);
+}
+.matChecked{
+  background: #337ab7;
+}
+
+
+.color1{
+  background-color:#04519b;
+   /* background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #04519b), color-stop(1, #04519b) );   */
+ 
+}
+
+.btn.btn-info.btn-simple, .navbar .navbar-nav > li > a.btn.btn-info.btn-simple{
+  color: white;
+}
+
+.checkbox label, .radio label, label, .label-on-left, .label-on-right{
+  color: white;
+}
+
+.modalclinicLocsize {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalclinicLocsizes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalstaffsizes{
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalSaveCred{
+  position: absolute;
+  top: 55%;
+  left: 56%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalresize{
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.changeModalWidth{
+  width : 450px !important;
+
+}
+
+.changeModalBody{
+  padding-left: 100px;
+
+}
+
+.modalencounterlocsizes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+@media screen and(min-width: 1000px){
+  .modalencounterlocsizes {
+      position: absolute;
+      top: 23%;
+      left: 60%;
+      transform: translate(-50%, -50%) !important;
+  }
+}
+
+.modalmasterlookupsize{
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%) !important;
+}
+
+
+.addmodalencounterlocsize{
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalservicenotesize {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.modalservicetypesizes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.addmodalservicetypesizes{
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.card-title{
+  padding-top: 10px;
+  color: black;
+  }
+
+
+.table-header{
+  background-color: #e1eef4;
+  /* color: black; */ 
+}
+/* 
+.even { background-color: white; }
+.odd { background-color:  #e1eef4;} */
+
+
+table tr:nth-child(odd) {
+  background-color: white;
+}
+table tr:nth-child(even) {
+  background-color: #e1eef4;
+}
+table.dataTable .btn-simple.btn-icon {
+  padding: 1px !important;
+  margin: 1px !important;
+}
+table tbody tr td{
+  line-height: 1.0;
+}
+table thead tr th, tfoot tr th{
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  border-right-style:solid;
+  border-right-color:#ddd;
+  border-right-width: 1px ; 
+  border-left-style:solid;
+  border-left-color:#ddd;  
+  border-left-width: 1px ;  
+  border-top-style:solid;
+  border-top-color:#ddd;
+  border-top-width: 1px ;     
+
+}
+
+a {
+  /* color: rgb(16, 190, 212); */
+  color: #0288d1;
+     /* color: #23527c; */
+  }
+a:hover {
+      
+  /* color: rgb(16, 190, 212); */
+  text-decoration: underline;
+}
+
+.text-dark{
+  color: black;
+}
+
+.textColor{
+  text-decoration-color: black;
+  font-size: 25px !important;
+}
+.md2-select-header {
+  position: relative;
+  display: block;
+  height: 48px;
+  width: 100%;
+  padding-left: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  
+}
+.md2-select-header input {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+
+  
+}
+.md2-option {
+  font-size: 13px;
+  color: #000;
+
+  
+}
+.md2-select-placeholder {
+  color: rgba(0, 0, 0, 1);
+}
+
+.form-group .checkbox label, .form-group .radio label, 
+.form-group label, .form-group .label-on-left, .form-group .label-on-right{
+    color: black;
+}
+
+.alignHeight{
+  padding-top:9px;
+  padding-left:3px;
+}
+
+.alignHeight1{
+  padding-top:10px;
+  padding-right:29px;
+}
+
+.searchHeight{
+  top:-10px;
+}
+
+.height1{
+  padding-top:9px;
+}
+
+/* .md-select-menu-container {
+  z-index: 99999 !important;
+} */
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+ z-index: 999999 !important;
+ }
+ 
+ ::ng-deep .cdk-global-overlay-wrapper {
+   display: flex;
+   position: absolute;
+   z-index: 9999999 !important;
+ }
+ 
+ ::ng-deep .cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 9999999 !important;
+ }
+ 
+ ::ng-deep .cdk-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999999 !important;
+  pointer-events: auto;
+  transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+ opacity: 0;
+ }
+ 
+#floatTypeLable{
+ top:-13px;
+ font-size:14px;
+}
+
+#providertype_floatToLabel,#primaryLocation_floatToLabel
+{
+  top:-13px;
+  font-size:14px;
+}
+
+.customfloat{
+  -webkit-transform:translate(0px,-20px);
+
+  font-size:11px !important;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .card{
+     margin-top: 30px;
+    }
+
+    .modalencounterlocsizes {
+      position: absolute;
+      top: 318px;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .addmodalencounterlocsize{
+      position: absolute;
+      top: 318px;
+      left: 60%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .addmodalservicetypesizes{
+      position: absolute;
+      top: 318px;
+      left: 60%;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    .modalservicetypesizes {
+      position: absolute;
+      top: 318px;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    .modalservicenotesize {
+      position: absolute;
+      top: 318px;
+      left: 55%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .modalSaveCred{
+      position: absolute;
+      top: 55%;
+      left: 56%;
+      transform: translate(-50%, -50%) !important;
+  }
+  
+
+  .modalmasterlookupsize{
+      position: absolute;
+      top: 318px;
+      left: 60%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .modalclinicLocsizes {
+      position: absolute;
+      top: 399px;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .modalclinicLocsize {
+      position: absolute;
+      top: 350px;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+  .modalstaffsizes{
+      position: absolute;
+      top: 5%;
+      left: 2%;
+      transform: translate(-50%, -50%) !important;
+  }
+  
+  .modalresize{
+      position: absolute;
+      top: 6%;
+      left: 2%;
+      transform: translate(-50%, -50%) !important;
+  }
+
+}
+
+input::-webkit-input-placeholder {
+  color: white !important;        
+  }
+
+  input #newCredentials::-webkit-input-placeholder{
+      color: black;
+  }
+ 
+  #credentialfloatLable,#credential_floatLable
+ {
+    top:-10px;
+    font-size:14px;
+    left: 0px !important;
+ }
+
+ 
+.customfloat{
+  -webkit-transform:translate(0px,-20px);
+
+  font-size:11px !important;
+
+}
+
+  
+.btn-info1{
+  background-color: #449D44;
+  box-shadow: 4px 4px #1b4b1b;
+}
+
+.button-div-height{
+  top: -9px; 
+  left:-126px !important;
+}
+.button-div-heights{
+  top: -9px; 
+  left:-138px !important;
+}
+
+.button-heights{
+  top: -9px; 
+  left:-139px !important;
+}
+@media screen and (max-width: 768px) {
+  .button-div{
+    left:-70px !important;
+  }
+  .button-divs{
+      left:-100px !important;
+    }
+
+    .modalencounterlocsizes {
+      position: absolute;
+      top: 31%;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+  }
+}
+
+.reduce-size{
+  padding-top: 5px;
+}
+
+@media screen and (max-width: 660px) {
+  .sample{
+      width: 650px;
+  }
+}
+
+
+.resize{
+   padding-left: 20px !important;
+}
+
+.decrease-height{
+  height: 35px !important;
+  font-size: 13px !important;
+}
+::ng-deep .form-control, .form-group .form-control
+{
+   color : black;
+}
+
+.adjust-err-msg{
+  margin-top: 5px !important;
+}
+
+/* hover effect for text box */
+.tooltips {
+  display: none;
+  padding: 10px;
+  size:auto;
+  opacity: 100 !important;
+  z-index: 1;
+  width: 650px !important;
+}
+
+.inputTooltip:hover .tooltips {
+  background: #04519b ;
+  border-radius: 3px;
+  color: white;
+  display: inline;
+  min-height: 50px;
+  left: 0;
+  line-height: 30px;
+  position: absolute;
+}
+
+.inputTooltip:hover .tooltips:before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent ;
+  border-right: 5px solid transparent;
+  size:auto;
+  border-bottom: 5px solid blue;
+  white-space: pre-wrap;
+}
+/* Header and Footer background color */
+.header-footer-background{
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #04519b), color-stop(1, #04519b) ); 
+}
+/* Added by Bhupali
+changed to reduce spacing between rows. */
+
+ table thead tr th{
+     padding: 3px !important;
+     outline: 0;
+ }
+tbody  tr  th{
+  padding: 3px !important;
+  outline: 0;
+}
+ tfoot tr th{
+  padding: 3px !important;
+  outline: 0;
+}
+ thead  tr  td{
+  padding: 3px !important;
+  outline: 0;
+}
+  tbody  tr  td{
+      padding: 3px !important;
+      outline: 0;
+  }
+  tfoot  tr  td{
+      padding: 3px !important;
+      outline: 0;
+  }
+  .buttonAlign1{
+      margin: 0px 20px !important;
+  }
+
+  .buttonAlign2{
+      margin:0px 10px !important;
+  }
+
+  .fix-add-encounter-modal{
+      min-height:190px;
+      width:420px;
+  }
+
+  .fix-card-content-add-encounter{
+      min-height: 180px;
+  }
+
+  .align-created-date{
+      text-align: center;
+  }
+
+  .move-header-up{
+      padding-top: 10px;
+  }
+
+  .change-input-width{
+      width: 245px;
+  }
+
+  .give-padding-top-modal-service-type{
+      padding-top: 5px;
+  }
+
+  .center-enable-checkbox{
+      text-align: center;
+  }
+
+  .modalstaffsizes[_ngcontent-c9] {
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    transform: translate(-50%, -50%) !important;
+}
+
+  

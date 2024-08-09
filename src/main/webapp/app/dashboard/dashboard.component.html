@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header" data-background-color>
+                        <div class="col-sm-6 col-md-4  col-xs-5">
+                            <tr>
+                                <td>
+                                    <h6>Dashboard</h6>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div class="card-content col-md-12 col-sm-12 table-padding" style="top:0px !important;height: 450px;">
+                        <div class="row">
+                            <div class="col-md-12" style="top: 25px;">
+                                <div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <form action="" method="">
+                                    <div class="row">
+                                        <div class="col-md-4" style="padding-right: 5px; padding-left: 10px;">
+                                            <div class="card card-chart"
+                                                style="border:1px;border-style:solid;border-color:#b2b2b2;margin-bottom:0px;">
+                                                <div class="card-content" style="height: 267px;">
+                                                    <h4 class="card-title">Project Status</h4>
+                                                    <div style="display: block">
+                                                        <canvas baseChart [data]='providerViewChart.chartValue'
+                                                            [labels]="providerViewChart.labels"
+                                                            [chartType]="providerViewChart.chartType"
+                                                            [colors]="providerViewChart.colors"
+                                                            [options]="providerViewChart.options">
+                                                        </canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="padding-right: 5px; padding-left: 5px;">
+                                            <div class="card card-chart"
+                                                style="border:1px;border-style:solid;border-color:#b2b2b2;margin-bottom:0px;">
+                                                <div class="card-content" style="height: 267px;">
+                                                    <h4 class="card-title">Document Status</h4>
+                                                    <div style="display: block">
+                                                        <canvas baseChart [data]='statusChart.chartValue'
+                                                            [labels]="statusChart.labels"
+                                                            [chartType]="statusChart.chartType"
+                                                            [colors]="statusChart.colors"
+                                                            [options]="statusChart.options">
+                                                        </canvas>
+                                                        <canvas id="myCanvas" style="padding-top:6px" width="400"
+                                                            height="15"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <!-- end col-md-12 -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>

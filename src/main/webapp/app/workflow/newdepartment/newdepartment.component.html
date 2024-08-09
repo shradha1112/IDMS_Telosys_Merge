@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                <div class="card-header" data-background-color>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-5  col-xs-5">
+                            <tr>
+                                <td>
+                                    <h6>{{mode}} Department</h6>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" color="#03659D" fullScreen="true"
+                    type="line-scale-pulse-out-rapid">
+                </ngx-spinner>
+                <div class="card-content ">
+                    <div *ngIf="statusCode === 200" class="alert alert-success" data-icon-bg-color="alert-green">
+                        <strong>Department Added Successfully</strong>
+                    </div>
+                    <div *ngIf="statusCode === 201" class="alert alert-success" data-icon-bg-color="alert-green">
+                        <strong>Department Deleted Successfully</strong>
+                    </div>
+                    <form [formGroup]="AddDeptForm" action="" method="">
+                        <div class="row">
+                            <div class="card-content">
+                                <div class="input-group col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="departmentName">
+                                            <label class="control-label required">
+                                                <small class="AsteriskColor">*</small>
+                                                Department Name
+                                            </label>
+                                            <input type="text" name="deptName" formControlName="deptName"
+                                                [(ngModel)]="deptName" class="form-control">
+                                            <idms-field-error-display
+                                                [displayError]="isFieldValid(AddDeptForm,'deptName')"
+                                                errorMsg="Department name is required">
+                                            </idms-field-error-display>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="desc">
+                                            <label class="control-label required">
+                                                Department Description
+                                            </label>
+                                            <input type="text" name="deptDesc" formControlName="deptDesc"
+                                                [(ngModel)]="deptDesc" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div>
+                                            <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                <div class="form-group" id="deptHeadName">
+                                                    <label #deptHeadNameLable id="deptHeadName_floatToLabel"
+                                                        class="control-label">
+                                                        <small class="AsteriskColor">*</small> Department Head
+                                                    </label>
+
+                                                    <md2-select (click)="ondeptHeadName()" formControlName="deptHeadName"
+                                                         style="width: 100%" [(ngModel)]="headName">
+                                                        <md2-option class="decrease-height" [value]="staff.staffId"
+                                                            *ngFor="let staff of allStaffMembers">
+                                                            {{staff.firstName}} {{staff.lastName}}
+                                                        </md2-option>
+                                                    </md2-select>
+                                                    <idms-field-error-display
+                                                        [displayError]="isFieldValid(AddDeptForm,'deptHeadName')"
+                                                        errorMsg="Required">
+                                                    </idms-field-error-display>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br><br><br>
+                        <div class="row">
+                            <div style="float: right;">
+                                <input type='button' [disabled]="loading" class="btn btn-info btn-round" name='SAVE'
+                                    value='SUBMIT' id="addFolder" (click)="onsubmit($event)" />&nbsp;
+                                <input type='button' (click)="onCancel()" class='btn button pull-right' name='cancel'
+                                    value="CANCEL">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>

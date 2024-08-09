@@ -1,0 +1,121 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                <div class="card-header" data-background-color>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-5  col-xs-5">
+                            <tr>
+                                <td>
+                                    <h6>{{action}}  Document Category</h6>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                <ngx-spinner bdColor="transparent" loadingText="Loading" size="defaut" fullScreen="true" type="line-scale-pulse-out-rapid">
+                </ngx-spinner>
+                <div class="card-content ">
+                    <div *ngIf="statusCode === 200" class="alert alert-success" data-icon-bg-color="alert-green">
+                        <strong>Category Added Successfully!!</strong>
+                    </div>
+                </div>
+                <form [formGroup]="AddDocumentCategoryForm" action="" method="">
+                        <div class="row" >
+               
+                            <div class="card-content">
+                                 <div class="input-group col-md-12">
+                        
+                                    <div class="col-md-4">
+                                         <div>
+                                             <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                            <div class="form-group label-floating" id="departmentName">
+                                                                <label #departmentNameLable id="departmentName_floatToLabel" class="control-label">
+                                                                    <small class="AsteriskColor">*</small> Department Name
+                                                                </label>
+                                                               
+                                                                <md2-select name="departmentName" formControlName="departmentName" [(ngModel)]="departmentName"
+                                                                    style="width: 100%" (click)="onDepartmentName()">
+                                                                    <md2-option class="decrease-height">Select Department</md2-option>
+                                                                    <md2-option class="decrease-height" value = "Engineering">Engineering</md2-option>
+                                                                    <md2-option class="decrease-height" value = "QHSE">QHSE</md2-option>
+                                                                    <md2-option class="decrease-height" value = "HR">HR</md2-option>
+                                                                    <md2-option class="decrease-height" value = "Operations">Operations</md2-option>
+                                                                </md2-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+
+
+                                            <div class="col-md-4">
+                                                <div>
+                                                    <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                                                   <div class="form-group label-floating" id="documentVisibility">
+                                                                       <label #documentVisibilityLable id="documentVisibility_floatToLabel" class="control-label">
+                                                                           <small class="AsteriskColor">*</small> Document Visibility
+                                                                       </label>
+                                                                      
+                                                                       <md2-select name="documentVisibility" formControlName="documentVisibility" [(ngModel)]="documentVisibility"
+                                                                           style="width: 100%" (click)="onDocumentVisibility()">
+                                                                           <md2-option class="decrease-height">Select Document Visibility</md2-option>
+                                                                           <md2-option class="decrease-height" value = "Global">Global</md2-option>
+                                                                           <md2-option class="decrease-height" value = "Private">Private</md2-option>
+                                                                           <md2-option class="decrease-height" value = "Department">Department</md2-option>
+                                                                       </md2-select>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                   </div>
+       
+                
+                               
+                        <div class="col-md-4">
+                                <div>
+                                    <div class="col-xs-3 col-md-9 col-sm-6" style="top:7px;">
+                                        <div class="form-group label-floating">
+                                            <label #categoryNamefloatLable id="categoryName_floatToLabel" class="control-label">
+                                                <small class="AsteriskColor">*</small> Document Category Name
+                                            </label>
+                                            
+                                            <input type="text" name="documentCategoryName" formControlName= "documentCategoryName"  [(ngModel)]="documentCategoryName" formControlName="documentCategoryName"
+                                            class="form-control">
+                                          <!--  <docms-field-error-display
+                                            [displayError]="isFieldValid(AddWorkFlowForm, 'projectName')"
+                                            errorMsg="Project Name is required ">
+                                        </docms-field-error-display>-->
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label required">
+                                        <small class="AsteriskColor">*</small>
+                                        Document Category Description
+                                    </label>
+                                    <input type="text" name="documentCategoryDescription" formControlName= "documentCategoryDescription"  [(ngModel)]="documentCategoryDescription" formControlName="documentCategoryDescription"
+                                            class="form-control">
+                                   </div>
+                            </div>
+
+                        
+
+         </div>    
+                                </div>
+                                    </div><br><br><br>
+                                    <div class="row">
+                                            <div style="float: right;"> 
+                                                <input type='button' [disabled]="loading" class="btn btn-info btn-round" name='SAVE'
+                                                value='SUBMIT' id="addDocCategory" (click) ="onsubmit($event)"/>&nbsp;
+                                                <input type='button' (click) = "onCancel()" class='btn button pull-right' name='cancel' value="CANCEL">
+                                            </div>
+                                        </div>
+        </form>
+        
+    </div>
+        </div>
+        
+    </div>
+</div>
